@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Mesas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>GESTIÓN DE MESAS ANTICUCHERIA</h1>
+
+    <!-- Contenedor para las mesas -->
+    <div id="mesas-container"></div>
+
+    <!-- Modal para gestionar la mesa seleccionada -->
+    <div id="menu-container" class="hidden">
+      <h2>Gestión de Mesa <span id="mesa-id"></span></h2>
+
+      <!-- Detalles de la mesa -->
+      <div id="mesa-detalle">
+        <h3>Platos asignados:</h3>
+        <ul id="platos-list"></ul>
+
+        <!-- Botones de estado de la mesa -->
+        <div class="estado-mesa">
+          <button id="btn-ocupado" class="btn ocupado">Marcar como Ocupado</button>
+          <button id="btn-disponible" class="btn disponible">Marcar como Disponible</button>
+        </div>
+
+        <!-- Botón para confirmar el pago -->
+        <button id="confirmar-pago" class="btn confirmar-pago">Confirmar Pago</button>
+      </div>
+
+      <!-- Menú de platos -->
+      <h3>Asignar nuevos platos:</h3>
+      <div id="menu-list" class="menu-buttons"></div>
+
+      <!-- Botón para cerrar el menú -->
+      <button id="cerrar-menu" class="btn cerrar">Cerrar</button>
+    </div>
+
+    <!-- Historial de ventas por mesa -->
+    <div id="ventas-container">
+      <h2>Historial de Ventas por Mesa</h2>
+      <button id="limpiar-historial" class="btn limpiar-historial">Limpiar Todo el Historial</button>
+      
+      <!-- Total de ventas acumulado -->
+      <div id="total-ventas">
+        <strong>Total de Ventas Acumulado: </strong> <span id="total-ventas-amount">$0</span>
+      </div>
+
+      <ul id="ventas-list"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
