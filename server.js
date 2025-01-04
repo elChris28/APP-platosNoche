@@ -1,19 +1,25 @@
 const WebSocket = require('ws');
 
-// Crear el servidor WebSocket en el puerto 8080
-const server = new WebSocket.Server({ port: 8080 });
+// Configura el puerto dinámico proporcionado por la plataforma o usa 8080 localmente
+const PORT = process.env.PORT || 8080;
 
-let clients = []; // Lista para almacenar clientes conectados
+// Crea el servidor WebSocket
+const server = new WebSocket.Server({ port: PORT });
+
+// Lista de clientes conectados
+let clients = [];
 
 server.on('connection', (ws) => {
   console.log('Cliente conectado');
+
+  // Agregar el cliente a la lista
   clients.push(ws);
 
-  // Cuando se recibe un mensaje desde un cliente
+  // Manejar mensajes recibidos del cliente
   ws.on('message', (message) => {
     console.log('Mensaje recibido:', message);
 
-    // Reenviar el mensaje a todos los clientes conectados
+    // Reenviar el mensaje a todos los demás clientes conectados
     clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(message);
@@ -21,11 +27,17 @@ server.on('connection', (ws) => {
     });
   });
 
-  // Cuando un cliente se desconecta
+  // Manejar cuando un cliente se desconecta
   ws.on('close', () => {
-    clients = clients.filter((client) => client !== ws);
     console.log('Cliente desconectado');
+    clients = clients.filter((client) => client !== ws); // Remover cliente de la lista
+  });
+
+  // Manejar errores en la conexión
+  ws.on('error', (error) => {
+    console.error('Error en la conexión:', error);
   });
 });
 
-console.log('Servidor WebSocket escuchando en el puerto 8080');
+// Confirmar que el servidor está escuchando
+console.log(`Servidor WebSocket escuchando en el puerto ${PORT}`);
