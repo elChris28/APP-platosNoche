@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const limpiarHistorialButton = document.getElementById("limpiar-historial");
 
   // Conexión al servidor WebSocket
-  const socket = new WebSocket("ws://localhost:8080");
+  const socket = new WebSocket('wss://tu-proyecto.up.railway.app');
 
   // Escuchar mensajes del servidor WebSocket
   socket.addEventListener("message", (event) => {
