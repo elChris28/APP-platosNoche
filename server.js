@@ -1,18 +1,19 @@
 const WebSocket = require('ws');
 
-// Configura el puerto dinámico proporcionado por la plataforma o usa 8080 localmente
+// Configuración del puerto dinámico proporcionado por Railway o 8080 para local
 const PORT = process.env.PORT || 8080;
 
-// Crea el servidor WebSocket
+// Crear el servidor WebSocket
 const server = new WebSocket.Server({ port: PORT });
 
-// Lista de clientes conectados
+// Lista para almacenar clientes conectados
 let clients = [];
 
+// Manejar nuevas conexiones
 server.on('connection', (ws) => {
-  console.log('Cliente conectado');
-
-  // Agregar el cliente a la lista
+  console.log('Nuevo cliente conectado');
+  
+  // Agregar cliente a la lista
   clients.push(ws);
 
   // Manejar mensajes recibidos del cliente
@@ -27,10 +28,10 @@ server.on('connection', (ws) => {
     });
   });
 
-  // Manejar cuando un cliente se desconecta
+  // Manejar desconexiones del cliente
   ws.on('close', () => {
     console.log('Cliente desconectado');
-    clients = clients.filter((client) => client !== ws); // Remover cliente de la lista
+    clients = clients.filter((client) => client !== ws); // Eliminar cliente de la lista
   });
 
   // Manejar errores en la conexión
